@@ -5,10 +5,13 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { bookReducer } from "../src/reducers/bookReducer";
 
+import { composeWithDevTools } from 'redux-devtools-extension'
+
 import App from "./App";
 import thunk from "redux-thunk";
 
-const store = createStore(bookReducer, applyMiddleware(thunk));
+const store = createStore(bookReducer, composeWithDevTools(applyMiddleware(thunk)));
+
 
 ReactDOM.render(
   <StrictMode>

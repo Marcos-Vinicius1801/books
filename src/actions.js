@@ -1,17 +1,17 @@
-import { Axios } from "axios";
+import {api} from '../src/services/api'
 
+export const fetchBooks = () =>  async (dispatch, getState) => {
+  dispatch({type: "FETCH_BOOKS_REQUEST"})
+     try{
+      const response = await api.get('/books');
+      
+ 
+      dispatch({type: "FETCH_BOOKS_SUCCESS", payload:response.data.books},
+      
+      );
+      
 
-export const fetchBooks = () => {
-  return async (dispatch, getState) => {
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/todos"
-    );
-
-    console.log(response.data);
-
-    dispatch({
-      type: "FETCH_BOOKS",
-      payload: response.data
-    });
-  };
+    } catch(error){
+      dispatch({type: "FETCH_BOOKS_FAILURE", err:error})
+    }
 };
